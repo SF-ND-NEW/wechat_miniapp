@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
     data: { isSubmitting: false },
     onSubmit(e) {
@@ -7,12 +8,11 @@ Page({
             return;
         }
         this.setData({ isSubmitting: true });
-        const token = wx.getStorageSync('token');
-        wx.request({
-            url: 'http://127.0.0.1:8000/api/wechat/bind',
+        
+        app.globalData.request({
+            url: app.globalData.env.API_BASE_URL+'/api/wechat/bind',
             method: 'POST',
             data: { student_id, name },
-            header: { 'Authorization': 'Bearer ' + token },
             success: res => {
                 const msg = res.data.msg || (res.data.success ? "绑定成功" : res.data.detail);
                 wx.showToast({ title: msg, icon: res.data.success ? 'success' : 'none' });
@@ -28,6 +28,6 @@ Page({
             complete: () => {
                 this.setData({ isSubmitting: false });
             }
-        })
+        });
     }
 })

@@ -1,0 +1,11 @@
+<!--pages/myrequests/myrequests.wxml-->
+<scroll-view style="text-align: center;">
+    <view style="padding-top: 20rpx;">
+        <text style="font-size:x-large">点歌记录</text>
+    </view>
+    <view style="border: 2rpx solid;margin-top: 40rpx;background-color: aliceblue;">
+        <view wx:for="{{content}}" style="padding: 5rpx;">
+            <text>{{index+1}}.{{item.song_name}} <text style="color: {{item.status=='approved'?'green':item.status=='rejected'?'red':'black'}};">{{item.status=='approved'?'已通过':item.status=='rejected'?'已拒绝':'待审核'}}</text></text>
+        </view>
+    </view>
+</scroll-view>

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/songrequest/songrequest",
-    "pages/bind/bind"
+    "pages/bind/bind",
+    "pages/myrequests/myrequests"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -11,5 +12,28 @@
   "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+      "selectedColor": "#31869B",
+      "list": [
+          {
+              "pagePath": "pages/bind/bind",
+              "text": "绑定",
+              "iconPath": "assets/imgs/MdiLinkVariant.png",
+              "selectedIconPath": "assets/imgs/MdiLinkVariant.png"
+          },
+          {
+              "pagePath": "pages/songrequest/songrequest",
+              "text": "点歌页",
+              "iconPath": "assets/imgs/MaterialSymbolsSearchRounded.png",
+              "selectedIconPath": "assets/imgs/MaterialSymbolsSearchRounded.png"
+          },
+          {
+              "text": "我的点歌",
+              "pagePath": "pages/myrequests/myrequests",
+              "iconPath": "assets/imgs/StreamlineSharpSongRecommendation.png",
+              "selectedIconPath": "assets/imgs/StreamlineSharpSongRecommendation.png"
+          }
+      ]
+  }
 }

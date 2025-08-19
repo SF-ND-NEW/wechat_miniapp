@@ -1,4 +1,4 @@
-<!--pages/bind.wxml-->
+<!--pages/bind/bind.wxml-->
 <scroll-view>
     <view class="container">
         <form bindsubmit="onSubmit">
