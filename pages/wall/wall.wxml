@@ -25,9 +25,9 @@
     <view wx:for="{{messages}}" wx:key="id" class="message-item" bindtap="goToDetail" data-id="{{item.id}}">
       <view class="message-header">
         <view class="message-type">
-          <text class="type-tag type-{{item.message_type}}">{{getTypeText(item.message_type)}}</text>
+          <text class="type-tag type-{{item.message_type}}">{{item.vmessage_type}}</text>
         </view>
-        <view class="message-time">{{formatTime(item.timestamp)}}</view>
+        <view class="message-time">{{item.vtimestamp}}</view>
       </view>
       
       <view class="message-title" wx:if="{{item.title}}">{{item.title}}</view>
@@ -44,7 +44,7 @@
           <text class="stat-item">👍 {{item.like_count}}</text>
         </view>
         <view class="tags" wx:if="{{item.tags}}">
-          <text class="tag" wx:for="{{parseTags(item.tags)}}" wx:key="*this">{{item}}</text>
+          <text class="tag" wx:for="{{item.vtags}}" wx:key="*this">{{item}}</text>
         </view>
       </view>
     </view>

@@ -1,13 +1,12 @@
 {
   "pages": [
+    "pages/wall/wall",
     "pages/songrequest/songrequest",
     "pages/bind/bind",
     "pages/myrequests/myrequests",
-    "pages/wall/wall",
     "pages/wall-post/wall-post",
     "pages/wall-detail/wall-detail",
     "pages/admin/admin",
-    "pages/admin/song-manage",
     "pages/admin/wall-manage"
   ],
   "window": {
@@ -21,12 +20,12 @@
   "lazyCodeLoading": "requiredComponents",
   "tabBar": {
     "selectedColor": "#31869B",
-    "list": [
+    "list": [ 
       {
-        "pagePath": "pages/bind/bind",
-        "text": "绑定",
-        "iconPath": "assets/imgs/MdiLinkVariant.png",
-        "selectedIconPath": "assets/imgs/MdiLinkVariant.png"
+        "text": "校园墙",
+        "pagePath": "pages/wall/wall",
+        "iconPath": "assets/imgs/wall.png",
+        "selectedIconPath": "assets/imgs/wall.png"
       },
       {
         "pagePath": "pages/songrequest/songrequest",
@@ -35,10 +34,10 @@
         "selectedIconPath": "assets/imgs/MaterialSymbolsSearchRounded.png"
       },
       {
-        "text": "校园墙",
-        "pagePath": "pages/wall/wall",
-        "iconPath": "assets/imgs/wall.png",
-        "selectedIconPath": "assets/imgs/wall.png"
+        "pagePath": "pages/bind/bind",
+        "text": "绑定",
+        "iconPath": "assets/imgs/MdiLinkVariant.png",
+        "selectedIconPath": "assets/imgs/MdiLinkVariant.png"
       }
     ]
   }

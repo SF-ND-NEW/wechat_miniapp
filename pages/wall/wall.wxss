@@ -21,6 +21,7 @@
   gap: 16rpx;
   margin-bottom: 20rpx;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tab {

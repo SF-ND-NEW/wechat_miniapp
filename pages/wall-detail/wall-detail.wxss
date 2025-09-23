@@ -130,7 +130,43 @@
   margin-bottom: 20rpx;
   display: block;
 }
+.send-input {
+  flex: 1;
+  height: 72rpx;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10rpx);
+  border-radius: 36rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+}
 
+.send-input:focus {
+  background: white;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.send-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12rpx 24rpx;
+  border-radius: 36rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 6rpx 16rpx rgba(102, 126, 234, 0.4);
+}
+
+.send-btn::after {
+  border: none;
+}
 .tags {
   display: flex;
   gap: 12rpx;
@@ -219,4 +255,49 @@
   background-color: #1296db;
   color: white;
   border: none;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.message-item {
+  background-color: white;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+
+.message-item:active {
+  background-color: #f9f9f9;
+  transform: scale(0.98);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.type-tag {
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  font-size: 20rpx;
+  color: white;
+}
+
+.type-general {
+  background-color: #4CAF50;
+}
+
+.type-lost_and_found {
+  background-color: #FF9800;
+}
+
+.type-confession {
+  background-color: #E91E63;
 }

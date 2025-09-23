@@ -1,14 +1,6 @@
 <!-- 校园墙管理页面 -->
 <view class="wall-manage-container">
   
-  <!-- 顶部导航 -->
-  <view class="nav-header">
-    <view class="nav-back" bindtap="goBack">
-      <text class="back-icon">←</text>
-    </view>
-    <text class="nav-title">校园墙管理</text>
-    <view class="nav-placeholder"></view>
-  </view>
 
   <!-- 统计卡片 -->
   <view class="stats-cards">

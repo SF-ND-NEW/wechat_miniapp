@@ -20,7 +20,7 @@ Page({
 
         // 如果本地没有信息，通过API检查
         app.globalData.request({
-            url: app.globalData.env.API_BASE_URL + '/api/wechat/user',
+            url: app.globalData.env.API_BASE_URL + '/api/wechat/userinfo',
             method: 'GET',
             success: res => {
                 if (res.data.success && res.data.data && res.data.data.student_id) {

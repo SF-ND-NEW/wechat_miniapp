@@ -6,9 +6,19 @@ Page({
         loading: true,
         error: '',
         liking: false,
-        messageId: null
+        messageId: null,
+        messages: [],
+        sendMessage: ''
     },
-
+    onSend() {
+      
+      this.loadMessage();
+  },
+    onSendInput(e) {
+      this.setData({
+        sendMessage: e.detail.value
+      });
+  },
     onLoad(options) {
         const { id } = options;
         if (id) {
@@ -42,14 +52,18 @@ Page({
             loading: true,
             error: ''
         });
-
         app.globalData.request({
             url: app.globalData.env.API_BASE_URL + `/api/wall/messages/${this.data.messageId}`,
             success: res => {
+              let temp = res.data;
+              temp.vtags = this.parseTags(temp.tags);
+              temp.vmessage_type = this.getTypeText(temp.message_type);
+              temp.vtimestamp = this.formatTime(temp.timestamp);
                 this.setData({
-                    message: res.data,
+                    message: temp,
                     loading: false
                 });
+                this.setData({realtime:this.formatTime(res.data.timestamp)})
             },
             fail: err => {
                 console.error('加载消息详情失败:', err);
@@ -59,6 +73,21 @@ Page({
                 });
             }
         });
+        app.globalData.request({
+          url: app.globalData.env.API_BASE_URL + `/api/comment/message?wall_id=${this.data.messageId}`,
+            success: res => {
+                this.setData({
+                    messages: res.data.items 
+                });
+            },
+            fail: err => {
+                console.error('加载消息评论失败:', err);
+                this.setData({
+                    loading: false,
+                    error: '加载失败，请重试'
+                });
+            }
+        })
     },
 
     // 点赞消息
@@ -119,6 +148,7 @@ Page({
 
     // 获取类型文本
     getTypeText(type) {
+      console.log(type);
         const typeMap = {
             'general': '普通',
             'lost_and_found': '失物招领',

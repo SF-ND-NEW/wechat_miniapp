@@ -2,9 +2,9 @@
   <!-- 消息头部 -->
   <view class="message-header">
     <view class="type-info">
-      <text class="type-tag type-{{message.message_type}}">{{getTypeText(message.message_type)}}</text>
+      <text class="type-tag type-{{message.message_type}}">{{message.vmessage_type}}</text>
     </view>
-    <view class="time-info">{{formatTime(message.timestamp)}}</view>
+    <view class="time-info">{{message.vtimestamp}}</view>
   </view>
 
   <!-- 消息标题 -->
@@ -29,7 +29,7 @@
   <view class="tags-section" wx:if="{{message.tags}}">
     <text class="section-title">标签</text>
     <view class="tags">
-      <text class="tag" wx:for="{{parseTags(message.tags)}}" wx:key="*this">{{item}}</text>
+      <text class="tag" wx:for="{{message.vtags}}" wx:key="*this">{{item}}</text>
     </view>
   </view>
 
@@ -54,8 +54,18 @@
       📋 复制联系方式
     </button>
   </view>
+  <text style="font-size: 36rpx;font-weight: bold;">讨论区</text>
+  <!-- 发送栏 -->
+  <view class="send-container">
+    <input class="send-input" placeholder="发送内容..." bindinput="onSendInput" value="{{sendMessage}}" />
+    <button class="send-btn" bindtap="onSend" size="mini">发送</button>
+  </view>
+  <view class="message-list">
+    <view wx:for="{{messages}}" wx:key="id" class="message-item"  data-id="{{item.id}}">
+      <text>{{item.content}}</text>
+    </view>
+  </view>
 </view>
-
 <!-- 加载状态 -->
 <view class="loading" wx:if="{{loading}}">
   <text>加载中...</text>

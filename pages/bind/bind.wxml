@@ -12,7 +12,7 @@
     <!-- 标题区域 -->
     <view class="title-section">
       <image class="logo" src="/assets/imgs/MdiLinkVariant.png"></image>
-      <text class="title">欢迎使用点歌台</text>
+      <text class="title">欢迎使用</text>
       <text class="subtitle">请完成账号绑定以开始使用</text>
     </view>
     
@@ -48,7 +48,7 @@
           form-type="submit" 
           class="submit-btn" 
           loading="{{isSubmitting}}"
-          disabled="{{isSubmitting}}">
+          disabled="{{isSubmitting}}" style="position: relative; left: 1rpx; top: 26rpx">
           {{isSubmitting ? '绑定中...' : '完成绑定'}}
         </button>
       </form>
