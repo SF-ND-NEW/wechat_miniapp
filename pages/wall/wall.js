@@ -33,6 +33,10 @@ Page({
             url: app.globalData.env.API_BASE_URL + '/api/wechat/isbound',
             success: res => {
                 if (!res.data.is_bound) {
+                    const userInfo = wx.getStorageSync('userInfo');
+                    if(userInfo && userInfo.student_id){
+                        wx.clearStorageSync();
+                    }
                     wx.redirectTo({ url: '/pages/bind/bind' });
                 } else {
                     // 重新检查管理员状态
