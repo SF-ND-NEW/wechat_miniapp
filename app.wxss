@@ -1,2 +1,179 @@
 /**app.wxss - 全局样式**/
 @import 'miniprogram_npm/tdesign-miniprogram/common/style/theme/_index.wxss';
+
+page {
+	background: linear-gradient(180deg, #f7f9fc 0%, #eef2f8 100%);
+	color: #1f2937;
+	font-family: 'PingFang SC', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+	line-height: 1.6;
+}
+
+view,
+text,
+button,
+input,
+textarea,
+image,
+scroll-view {
+	box-sizing: border-box;
+}
+
+button::after {
+	border: none;
+}
+
+.ui-page {
+	min-height: 100vh;
+	padding: 48rpx 40rpx 64rpx;
+}
+
+.ui-page--narrow {
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+}
+
+.ui-title {
+	font-size: 42rpx;
+	font-weight: 600;
+	color: #0f172a;
+}
+
+.ui-subtitle {
+	margin-top: 12rpx;
+	font-size: 26rpx;
+	color: #6b7280;
+}
+
+.ui-card {
+	background: #ffffff;
+	border-radius: 28rpx;
+	padding: 36rpx;
+	margin-bottom: 28rpx;
+	box-shadow: 0 22rpx 60rpx rgba(15, 23, 42, 0.06);
+}
+
+.ui-card--compact {
+	padding: 26rpx 30rpx;
+}
+
+.ui-card--quiet {
+	box-shadow: 0 12rpx 32rpx rgba(15, 23, 42, 0.04);
+}
+
+.ui-flex {
+	display: flex;
+	align-items: center;
+}
+
+.ui-flex--between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ui-flex--column {
+	display: flex;
+	flex-direction: column;
+}
+
+.ui-gap-sm {
+	gap: 12rpx;
+}
+
+.ui-gap-md {
+	gap: 20rpx;
+}
+
+.ui-gap-lg {
+	gap: 28rpx;
+}
+
+.ui-pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 8rpx 24rpx;
+	border-radius: 999rpx;
+	font-size: 24rpx;
+	font-weight: 500;
+}
+
+.ui-pill--primary {
+	background: rgba(37, 99, 235, 0.12);
+	color: #1d4ed8;
+}
+
+.ui-pill--success {
+	background: rgba(16, 185, 129, 0.12);
+	color: #047857;
+}
+
+.ui-pill--warning {
+	background: rgba(245, 158, 11, 0.14);
+	color: #b45309;
+}
+
+.ui-pill--danger {
+	background: rgba(239, 68, 68, 0.12);
+	color: #b91c1c;
+}
+
+.ui-muted {
+	color: #9ca3af;
+}
+
+.ui-divider {
+	height: 1rpx;
+	background: linear-gradient(90deg, rgba(148, 163, 184, 0.1), rgba(148, 163, 184, 0.4), rgba(148, 163, 184, 0.1));
+	margin: 24rpx 0;
+}
+
+.ui-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 6rpx 18rpx;
+	border-radius: 18rpx;
+	font-size: 22rpx;
+	font-weight: 500;
+	background: #f1f5f9;
+	color: #475569;
+}
+
+.ui-list-spacing > view:not(:last-child) {
+	margin-bottom: 20rpx;
+}
+
+.ui-section-title {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #0f172a;
+	margin-bottom: 16rpx;
+}
+
+.ui-empty {
+	padding: 140rpx 24rpx;
+	text-align: center;
+	color: #94a3b8;
+	font-size: 28rpx;
+}
+
+.ui-chip-set {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16rpx;
+}
+
+.ui-chip {
+	padding: 6rpx 18rpx;
+	border-radius: 999rpx;
+	background: rgba(99, 102, 241, 0.12);
+	color: #4338ca;
+	font-size: 24rpx;
+}
+
+.ui-shadow-none {
+	box-shadow: none;
+}
+
+.ui-scroll-x {
+	white-space: nowrap;
+}

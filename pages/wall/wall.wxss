@@ -1,408 +1,266 @@
-/* 校园墙页面样式 */
-.wall-container {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  padding-bottom: 120rpx;
+/* 校园墙页面焕新样式 */
+.wall-page {
+	padding-bottom: 100rpx;
 }
 
-/* 顶部操作栏 */
-.top-bar {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20rpx);
-  padding: 30rpx;
-  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+.wall-hero {
+	background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(37, 99, 235, 0.12) 100%);
+	border: 1rpx solid rgba(37, 99, 235, 0.28);
 }
 
-.filter-tabs {
-  display: flex;
-  gap: 16rpx;
-  margin-bottom: 20rpx;
-  flex-wrap: wrap;
-  justify-content: center;
+.wall-hero__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 24rpx;
 }
 
-.tab {
-  padding: 12rpx 24rpx;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10rpx);
-  border-radius: 30rpx;
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-  border: 1rpx solid rgba(255, 255, 255, 0.2);
+.wall-hero__actions {
+	display: flex;
+	gap: 16rpx;
 }
 
-.tab.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
-  font-weight: bold;
-  transform: translateY(-2rpx);
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+.wall-btn {
+	padding: 0 36rpx;
+	height: 88rpx;
+	border-radius: 999rpx;
+	font-size: 28rpx;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+    box-shadow: 0 16rpx 36rpx rgba(37, 99, 235, 0.16);
+    width: 180rpx;
 }
 
-.action-buttons {
-  display: flex;
-  gap: 16rpx;
-  justify-content: flex-end;
+.wall-btn--primary {
+	background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+	color: #ffffff;
 }
 
-.admin-btn {
-  background: linear-gradient(45deg, #ff9800, #f57c00);
-  color: white;
-  border: none;
-  padding: 12rpx 24rpx;
-  border-radius: 30rpx;
-  font-size: 24rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(255, 152, 0, 0.3);
-  transition: all 0.3s ease;
+.wall-btn--ghost {
+	background: rgba(255, 255, 255, 0.8);
+	color: #1d4ed8;
+	box-shadow: none;
+	border: 1rpx solid rgba(59, 130, 246, 0.3);
 }
 
-.admin-btn:hover {
-  transform: translateY(-2rpx);
-  box-shadow: 0 6rpx 16rpx rgba(255, 152, 0, 0.4);
+.wall-toolbar {
+	display: flex;
+	flex-direction: column;
+	gap: 28rpx;
 }
 
-.admin-btn::after {
-  border: none;
+.wall-tabs {
+	display: flex;
+	gap: 16rpx;
+	flex-wrap: wrap;
 }
 
-.post-btn {
-  background: linear-gradient(45deg, #4facfe, #00f2fe);
-  color: white;
-  border: none;
-  padding: 12rpx 24rpx;
-  border-radius: 30rpx;
-  font-size: 24rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(79, 172, 254, 0.3);
-  transition: all 0.3s ease;
+.wall-tab {
+	padding: 14rpx 28rpx;
+	border-radius: 999rpx;
+	font-size: 26rpx;
+	color: #6b7280;
+	background: #f1f5f9;
+	border: 1rpx solid transparent;
+	transition: all 0.2s ease;
 }
 
-.post-btn:hover {
-  transform: translateY(-2rpx);
-  box-shadow: 0 6rpx 16rpx rgba(79, 172, 254, 0.4);
+.wall-tab.is-active {
+	background: #1d4ed8;
+	color: #ffffff;
+	border-color: rgba(29, 78, 216, 0.3);
+	box-shadow: 0 10rpx 24rpx rgba(29, 78, 216, 0.2);
 }
 
-.post-btn::after {
-  border: none;
+.wall-search {
+	display: flex;
+	gap: 20rpx;
+	align-items: center;
 }
 
-/* 搜索栏 */
-.search-container {
-  display: flex;
-  gap: 16rpx;
-  padding: 20rpx 30rpx;
-  align-items: center;
+.wall-search__input {
+	flex: 1;
+	height: 88rpx;
+	border-radius: 24rpx;
+	border: 1rpx solid rgba(148, 163, 184, 0.35);
+	background: #f8fafc;
+	font-size: 30rpx;
+	color: #0f172a;
+	padding: 0 28rpx;
 }
 
-.search-input {
-  flex: 1;
-  height: 72rpx;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10rpx);
-  border-radius: 36rpx;
-  padding: 0 24rpx;
-  font-size: 28rpx;
-  border: none;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+.wall-search__input:focus {
+	border-color: rgba(37, 99, 235, 0.55);
+	background: #ffffff;
+	box-shadow: 0 0 0 6rpx rgba(37, 99, 235, 0.12);
 }
 
-.search-input:focus {
-  background: white;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+.wall-search__btn {
+	height: 72rpx;
+	min-width: 160rpx;
+	border-radius: 999rpx;
+	background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%);
+	color: #ffffff;
+	font-size: 28rpx;
+	font-weight: 600;
+	box-shadow: 0 16rpx 30rpx rgba(79, 70, 229, 0.2);
 }
 
-.search-btn {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  color: white;
-  border: none;
-  padding: 12rpx 24rpx;
-  border-radius: 36rpx;
-  font-size: 24rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
-  transition: all 0.3s ease;
+.wall-state {
+	text-align: center;
+	color: #4b5563;
+	font-size: 28rpx;
 }
 
-.search-btn:hover {
-  transform: translateY(-2rpx);
-  box-shadow: 0 6rpx 16rpx rgba(102, 126, 234, 0.4);
+.wall-feed {
+	display: flex;
+	flex-direction: column;
+	gap: 24rpx;
 }
 
-.search-btn::after {
-  border: none;
+.wall-card {
+	padding: 32rpx;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 消息列表 */
-.message-list {
-  padding: 0 30rpx;
+.wall-card:active {
+	transform: translateY(2rpx);
+	box-shadow: 0 14rpx 36rpx rgba(15, 23, 42, 0.12);
 }
 
-.message-item {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20rpx);
-  border-radius: 24rpx;
-  padding: 32rpx;
-  margin-bottom: 20rpx;
-  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
+.wall-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20rpx;
 }
 
-.message-item:hover {
-  transform: translateY(-4rpx);
-  box-shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.15);
-}
-
-.message-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16rpx;
-}
-
-.message-type .type-tag {
-  padding: 8rpx 16rpx;
-  border-radius: 20rpx;
-  font-size: 20rpx;
-  font-weight: bold;
-  color: white;
+.wall-card__tag {
+	padding: 10rpx 24rpx;
+	border-radius: 999rpx;
+	font-size: 24rpx;
+	font-weight: 600;
+	color: #ffffff;
 }
 
 .type-general {
-  background: linear-gradient(45deg, #4facfe, #00f2fe);
+	background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
 }
 
 .type-lost_and_found {
-  background: linear-gradient(45deg, #ff9500, #ff7300);
-}
-
-.type-confession {
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+	background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
 }
 
 .type-help {
-  background: linear-gradient(45deg, #52c41a, #389e0d);
-}
-
-.message-time {
-  font-size: 22rpx;
-  color: #999;
-}
-
-.message-title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 12rpx;
-  line-height: 1.4;
-}
-
-.message-content {
-  font-size: 28rpx;
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 16rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
-
-.message-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16rpx;
-  margin-bottom: 16rpx;
-}
-
-.meta-item {
-  font-size: 24rpx;
-  color: #666;
-  background: #f5f5f5;
-  padding: 6rpx 12rpx;
-  border-radius: 12rpx;
-}
-
-.message-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stats {
-  display: flex;
-  gap: 20rpx;
-}
-
-.stat-item {
-  font-size: 22rpx;
-  color: #999;
-}
-
-.tags {
-  display: flex;
-  gap: 8rpx;
-  flex-wrap: wrap;
-}
-
-.tag {
-  font-size: 20rpx;
-  color: #667eea;
-  background: rgba(102, 126, 234, 0.1);
-  padding: 4rpx 8rpx;
-  border-radius: 8rpx;
-  border: 1rpx solid rgba(102, 126, 234, 0.2);
-}
-
-/* 加载和空状态 */
-.loading, .empty {
-  text-align: center;
-  padding: 80rpx 40rpx;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 28rpx;
-}
-
-/* 响应式设计 */
-@media (max-width: 750rpx) {
-  .top-bar {
-    padding: 20rpx;
-  }
-  
-  .filter-tabs {
-    gap: 12rpx;
-  }
-  
-  .tab {
-    padding: 8rpx 16rpx;
-    font-size: 22rpx;
-  }
-  
-  .action-buttons {
-    flex-direction: column;
-    gap: 8rpx;
-  }
-  
-  .search-container {
-    flex-direction: column;
-    gap: 12rpx;
-  }
-  
-  .search-input, .search-btn {
-    width: 100%;
-  }
-  
-  .message-list {
-    padding: 0 20rpx;
-  }
-  
-  .message-item {
-    padding: 24rpx;
-  }
-  
-  .message-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12rpx;
-  }
-}
-
-.post-btn {
-  background-color: #1296db;
-  color: white;
-  border: none;
-  padding: 8rpx 20rpx;
-  border-radius: 20rpx;
-}
-
-/* 搜索栏 */
-.search-container {
-  display: flex;
-  gap: 20rpx;
-  margin-bottom: 20rpx;
-  background-color: white;
-  padding: 20rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
-}
-
-.search-input {
-  flex: 1;
-  padding: 16rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 8rpx;
-  background-color: #fafafa;
-}
-
-.search-btn {
-  background-color: #1296db;
-  color: white;
-  border: none;
-  padding: 8rpx 20rpx;
-  border-radius: 8rpx;
-}
-
-/* 消息列表 */
-.message-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-}
-
-.message-item {
-  background-color: white;
-  padding: 30rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
-  transition: all 0.3s;
-}
-
-.message-item:active {
-  background-color: #f9f9f9;
-  transform: scale(0.98);
-}
-
-.message-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16rpx;
-}
-
-.type-tag {
-  padding: 4rpx 12rpx;
-  border-radius: 16rpx;
-  font-size: 20rpx;
-  color: white;
-}
-
-.type-general {
-  background-color: #4CAF50;
-}
-
-.type-lost_and_found {
-  background-color: #FF9800;
-}
-
-.type-confession {
-  background-color: #E91E63;
-}
-
-.type-help {
-  background-color: #2196F3;
+	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
 }
 
 .type-announcement {
-  background-color: #9C27B0;
+	background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
 }
 
-.message-time {
-  font-size: 22rpx;
-  color: #999;
+.wall-card__time {
+	font-size: 24rpx;
+	color: #94a3b8;
+}
+
+.wall-card__title {
+	font-size: 34rpx;
+	font-weight: 600;
+	color: #111827;
+	margin-bottom: 16rpx;
+}
+
+.wall-card__content {
+	font-size: 28rpx;
+	color: #475569;
+	line-height: 1.7;
+	margin-bottom: 20rpx;
+}
+
+.wall-card__media {
+	margin-bottom: 20rpx;
+}
+
+.wall-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16rpx;
+	margin-bottom: 20rpx;
+}
+
+.wall-card__meta-item {
+	font-size: 24rpx;
+	color: #1f2937;
+	background: rgba(226, 232, 240, 0.6);
+	padding: 8rpx 18rpx;
+	border-radius: 999rpx;
+}
+
+.wall-card__footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20rpx;
+}
+
+.wall-card__stats {
+	display: flex;
+	gap: 20rpx;
+	color: #64748b;
+	font-size: 24rpx;
+}
+
+.wall-card__stat {
+	display: inline-flex;
+	align-items: center;
+	gap: 6rpx;
+}
+
+.wall-card__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12rpx;
+}
+
+.wall-card__chip {
+	padding: 6rpx 20rpx;
+	border-radius: 999rpx;
+	background: rgba(59, 130, 246, 0.12);
+	color: #1d4ed8;
+	font-size: 22rpx;
+}
+
+@media (max-width: 750rpx) {
+	.wall-hero__head {
+		flex-direction: column;
+	}
+
+	.wall-hero__actions {
+		width: 100%;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+
+	.wall-btn {
+		flex: 1;
+	}
+
+	.wall-search {
+		flex-direction: column;
+	}
+
+	.wall-search__btn,
+	.wall-search__input {
+		width: 100%;
+	}
+
+	.wall-card__footer {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 .message-title {

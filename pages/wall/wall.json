@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "校园墙",
+    "navigationBarTitleText": "留言板",
     "enablePullDownRefresh": true,
     "onReachBottomDistance": 50,
     "usingComponents": {

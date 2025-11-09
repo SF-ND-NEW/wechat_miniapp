@@ -1,100 +1,166 @@
-.post-container {
-  padding: 30rpx;
-  background-color: #f5f5f5;
-  min-height: 100vh;
+.wall-post-page {
+  padding-bottom: 100rpx;
 }
 
-.form-group {
-  background-color: white;
-  margin-bottom: 30rpx;
-  padding: 30rpx;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
-}
-
-.label {
-  display: block;
-  font-size: 28rpx;
-  color: #333;
-  font-weight: bold;
-  margin-bottom: 20rpx;
-}
-
-.form-input {
-  width: 100%;
-  height: 66rpx;
-  padding: 20rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 8rpx;
-  background-color: #fafafa;
-  font-size: 28rpx;
-}
-
-.form-textarea {
-  width: 100%;
-  height: 200rpx;
-  padding: 20rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 8rpx;
-  background-color: #fafafa;
-  font-size: 28rpx;
-  line-height: 1.5;
-}
-
-.char-count {
-  display: block;
-  text-align: right;
-  font-size: 24rpx;
-  color: #999;
-  margin-top: 10rpx;
-}
-
-.hint {
-  display: block;
-  font-size: 24rpx;
-  color: #999;
-  margin-top: 10rpx;
-}
-
-/* 类型选择器 */
-.type-selector {
+.wall-post-hero {
   display: flex;
-  gap: 20rpx;
+  flex-direction: column;
+  gap: 18rpx;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(147, 51, 234, 0.12) 100%);
+  border: 1rpx solid rgba(99, 102, 241, 0.24);
+}
+
+
+
+.wall-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+.wall-post-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 36rpx;
+}
+
+.wall-post-field {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.wall-post-field__label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.wall-post-field__line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wall-post-field__count {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+.wall-post-types {
+  display: flex;
+  gap: 16rpx;
   flex-wrap: wrap;
 }
 
-.type-item {
-  padding: 16rpx 24rpx;
-  background-color: #f0f0f0;
-  border-radius: 20rpx;
+.wall-post-type {
+  padding: 14rpx 28rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid rgba(148, 163, 184, 0.4);
   font-size: 26rpx;
-  color: #666;
-  transition: all 0.3s;
+  color: #475569;
+  background: rgba(248, 250, 252, 0.8);
+  transition: all 0.2s ease;
 }
 
-.type-item.active {
-  background-color: #1296db;
-  color: white;
+.wall-post-type.is-active {
+  border-color: rgba(99, 102, 241, 0.6);
+  background: rgba(99, 102, 241, 0.16);
+  color: #4338ca;
+  box-shadow: 0 10rpx 22rpx rgba(99, 102, 241, 0.16);
 }
 
-/* 提交按钮 */
-.submit-container {
-  margin-top: 50rpx;
-  margin-bottom: 30rpx;
-}
-
-.submit-btn {
+.wall-post-input,
+.wall-post-textarea {
   width: 100%;
-  background-color: #1296db;
-  color: white;
-  border: none;
-  padding: 24rpx;
-  border-radius: 12rpx;
-  font-size: 32rpx;
-  font-weight: bold;
+  border-radius: 24rpx;
+  border: 1rpx solid rgba(148, 163, 184, 0.35);
+  background: #f8fafc;
+  font-size: 28rpx;
+  color: #0f172a;
+  padding: 0 28rpx;
+  min-height: 92rpx;
 }
 
-.submit-btn[disabled] {
-  background-color: #ccc;
-  color: #999;
+.wall-post-input:focus,
+.wall-post-textarea:focus {
+  border-color: rgba(88, 80, 236, 0.55);
+  background: #ffffff;
+  box-shadow: 0 0 0 6rpx rgba(79, 70, 229, 0.12);
+}
+
+.wall-post-textarea {
+  padding-top: 24rpx;
+  padding-bottom: 24rpx;
+  min-height: 260rpx;
+  line-height: 1.6;
+}
+
+.wall-post-field__hint {
+  font-size: 24rpx;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.wall-post-upload {
+  padding-top: 8rpx;
+}
+
+.wall-post-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wall-post-submit__btn {
+  flex: 1;
+  height: 82rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 18rpx 36rpx rgba(37, 99, 235, 0.18);
+}
+
+.wall-post-submit__btn[disabled] {
+  background: rgba(148, 163, 184, 0.6);
+  box-shadow: none;
+}
+
+.wall-post-submit__btn::after {
+  border: none;
+}
+
+.wall-post-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.wall-post-section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.wall-post-tip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.wall-post-tip {
+  font-size: 26rpx;
+  color: #475569;
+  line-height: 1.6;
+}
+
+@media (max-width: 750rpx) {
+  .wall-post-submit {
+    flex-direction: column;
+  }
+
+  .wall-post-submit__btn {
+    width: 100%;
+  }
 }

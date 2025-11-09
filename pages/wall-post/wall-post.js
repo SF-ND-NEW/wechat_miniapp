@@ -1,5 +1,4 @@
 const app = getApp();
-
 Page({
     data: {
         messageType: 'general',
@@ -181,3 +180,4 @@ Page({
         });
     }
 });
+export {};

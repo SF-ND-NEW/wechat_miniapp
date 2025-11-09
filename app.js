@@ -4,7 +4,7 @@ const env = require('./env/index.js');
 function getOrRefreshToken(cb) {
     let accessToken = wx.getStorageSync('access_token');
     let refreshToken = wx.getStorageSync('refresh_token');
-    
+
     if (accessToken) {
         cb(accessToken);
     } else if (refreshToken) {
@@ -22,10 +22,10 @@ function wxLogin(cb) {
         success: res => {
             wx.request({
                 method: "POST",
-                url: env.API_BASE_URL+'/api/wechat/login',
+                url: env.API_BASE_URL + '/api/wechat/login',
                 data: { code: res.code },
                 success: r => {
-                    // 保存两种令牌
+                    // 保存两种令牌（会话存储）
                     wx.setStorageSync('access_token', r.data.access_token);
                     wx.setStorageSync('refresh_token', r.data.refresh_token);
                     cb(r.data.access_token);
@@ -39,7 +39,7 @@ function wxLogin(cb) {
 function refreshAccessToken(refreshToken, cb) {
     wx.request({
         method: "POST",
-        url: env.API_BASE_URL+'/api/wechat/refresh',
+        url: env.API_BASE_URL + '/api/wechat/refresh',
         data: { refresh_token: refreshToken },
         success: r => {
             if (r.data.access_token) {
@@ -69,14 +69,14 @@ function request(options) {
         const originalRequest = () => {
             wx.request({
                 ...options,
-                header: { 
+                header: {
                     ...(options.header || {}),
-                    Authorization: 'Bearer ' + token 
+                    Authorization: 'Bearer ' + token
                 },
                 fail: options.fail,
                 success: (res) => {
                     // 检查是否令牌过期
-                    if (res.statusCode === 401 && (res.data.detail === "token已过期，请刷新"||res.data.detail === "token无效")) {
+                    if (res.statusCode === 401 && (res.data.detail === "token已过期，请刷新" || res.data.detail === "token无效")) {
                         // 尝试使用刷新令牌
                         const refreshToken = wx.getStorageSync('refresh_token');
                         if (refreshToken) {
@@ -100,7 +100,7 @@ function request(options) {
                 complete: options.complete
             });
         };
-        
+
         originalRequest();
     });
 }
@@ -108,9 +108,9 @@ function request(options) {
 // 检查是否已绑定
 function checkBindAndRedirect() {
     request({
-        url: env.API_BASE_URL+'/api/wechat/isbound',
+        url: env.API_BASE_URL + '/api/wechat/isbound',
         success: res => {
-            if(res.errMsg) {
+            if (res.errMsg) {
                 console.log(res.errMsg);
             }
             if (res.data.is_bound) {
@@ -126,14 +126,14 @@ function checkBindAndRedirect() {
 }
 
 App({
-  globalData: {
-    env: env,
-    request: request // 导出包装后的请求函数
-  },
-  
-  onLaunch() {
-    checkBindAndRedirect();
-    console.log('当前环境:', env.ENV_TYPE);
-    console.log('API地址:', env.API_BASE_URL);
-  }
+    globalData: {
+        env: env,
+        request: request // 导出包装后的请求函数
+    },
+
+    onLaunch() {
+        checkBindAndRedirect();
+        console.log('当前环境:', env.ENV_TYPE);
+        console.log('API地址:', env.API_BASE_URL);
+    }
 });

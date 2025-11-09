@@ -1,0 +1,28 @@
+<scroll-view class="ui-page grade-page" scroll-y="true">
+	<view class="ui-card grade-hero">
+		<text class="ui-title">成绩文件</text>
+	</view>
+
+	<view wx:if="{{isAdmin}}" class="ui-card ui-card--compact grade-admin">
+		<view class="grade-admin__title">上传新的成绩文件</view>
+		<view class="grade-admin__form">
+			<input class="title-input" placeholder="输入成绩文件标题" value="{{uploadTitle}}" bindinput="handleTitleInput" />
+			<button class="grade-upload-btn" type="primary" size="mini" loading="{{uploading}}" bindtap="handleUpload">
+				上传Excel
+			</button>
+		</view>
+		<text class="grade-admin__hint">支持 .xls / .xlsx 文件</text>
+	</view>
+
+	<view wx:if="{{loading && files.length === 0}}" class="ui-card ui-card--compact grade-state">正在加载...</view>
+
+	<block wx:if="{{files.length > 0}}">
+		<view class="grade-files">
+			<block wx:for="{{files}}" wx:key="uid">
+				<file-card file="{{item}}" is-admin="{{isAdmin}}" bindpreview="handlePreview" binddelete="handleDelete" />
+			</block>
+		</view>
+	</block>
+
+	<view wx:elif="{{!loading}}" class="ui-empty">暂未发布成绩文件</view>
+</scroll-view>

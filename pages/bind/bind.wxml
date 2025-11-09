@@ -1,63 +1,46 @@
-<!--绑定页面-->
-<view class="bind-container">
-  <!-- 头部装饰 -->
-  <view class="header-decoration">
-    <view class="decoration-circle circle-1"></view>
-    <view class="decoration-circle circle-2"></view>
-    <view class="decoration-circle circle-3"></view>
-  </view>
-  
-  <!-- 主要内容 -->
-  <view class="content-container">
-    <!-- 标题区域 -->
-    <view class="title-section">
-      <image class="logo" src="/assets/imgs/MdiLinkVariant.png"></image>
-      <text class="title">欢迎使用</text>
-      <text class="subtitle">请完成账号绑定以开始使用</text>
-    </view>
-    
-    <!-- 表单区域 -->
-    <view class="form-container">
-      <form bindsubmit="onSubmit" class="bind-form">
-        <view class="input-group">
-          <view class="input-label">
-            <text class="label-text">学号</text>
-          </view>
-          <input 
-            name="student_id" 
-            class="form-input" 
-            type="number" 
-            maxlength="6" 
-            placeholder="请输入6位学号"/>
-        </view>
-        
-        <view class="input-group">
-          <view class="input-label">
-            <text class="label-text">姓名</text>
-          </view>
-          <input 
-            name="name" 
-            class="form-input" 
-            type="text" 
-            placeholder="请输入真实姓名"/>
-        </view>
-        
-        <button 
-          form-type="submit" 
-          class="submit-btn" 
-          loading="{{isSubmitting}}"
-          disabled="{{isSubmitting}}" style="position: relative; left: 1rpx; top: 26rpx">
-          {{isSubmitting ? '绑定中...' : '完成绑定'}}
-        </button>
-      </form>
-    </view>
-    
-    <!-- 提示信息 -->
-    <view class="tips-section">
-      <text class="tips-title">温馨提示</text>
-      <text class="tips-item">• 请确保学号和姓名真实有效</text>
-      <text class="tips-item">• 绑定后可以使用点歌功能</text>
-      <text class="tips-item">• 如有问题请联系管理员</text>
-    </view>
-  </view>
-</view>
+<scroll-view class="ui-page bind-page" scroll-y="true">
+	<view class="ui-card bind-hero">
+		<image class="bind-hero__icon" src="/assets/imgs/MdiLinkVariant.png"></image>
+		<text class="ui-title">账号绑定</text>
+		<text class="ui-subtitle">填写学号与姓名以便使用点歌、留言等功能</text>
+	</view>
+
+	<view class="ui-card ui-card--quiet bind-form-card">
+		<text class="bind-form__title">绑定信息</text>
+		<form bindsubmit="onSubmit" class="bind-form">
+			<view class="bind-field">
+				<text class="bind-field__label">学号</text>
+				<input
+					name="student_id"
+					class="bind-field__input"
+					type="number"
+					maxlength="7"
+					placeholder="请输入6~7位学号" />
+			</view>
+			<view class="bind-field">
+				<text class="bind-field__label">姓名</text>
+				<input
+					name="name"
+					class="bind-field__input"
+					type="text"
+					placeholder="请输入真实姓名" />
+			</view>
+			<button
+				form-type="submit"
+				class="bind-submit"
+				loading="{{isSubmitting}}"
+				disabled="{{isSubmitting}}">
+				{{isSubmitting ? '绑定中...' : '完成绑定'}}
+			</button>
+		</form>
+	</view>
+
+	<view class="ui-card bind-tips">
+		<text class="bind-tips__title">温馨提示</text>
+		<view class="bind-tips__list">
+			<text class="bind-tips__item">确保学号与姓名真实有效，避免审核失败</text>
+			<text class="bind-tips__item">完成绑定后即可使用点歌、留言、成绩等服务</text>
+			<text class="bind-tips__item">如遇到问题，请联系系统管理员协助处理</text>
+		</view>
+	</view>
+</scroll-view>

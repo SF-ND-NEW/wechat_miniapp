@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "file-card": "/pages/grade/file_card"
+  },
+  "navigationBarTitleText": "体育节成绩查询"
+}

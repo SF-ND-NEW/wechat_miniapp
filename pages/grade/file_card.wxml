@@ -1,0 +1,10 @@
+<view class="file-card ui-card ui-card--compact" bindtap="handlePreview">
+	<view class="file-info">
+		<text class="file-title">{{file.title}}</text>
+		<text class="file-name">{{file.file_name}}</text>
+		<text class="file-time">{{file.displayTime}}</text>
+	</view>
+	<view wx:if="{{isAdmin}}" class="file-actions">
+		<button class="delete-btn" type="warn" size="mini" catchtap="handleDelete">删除</button>
+	</view>
+</view>

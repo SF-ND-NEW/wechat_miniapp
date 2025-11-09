@@ -1,122 +1,183 @@
-<!-- 校园墙管理页面 -->
-<view class="wall-manage-container">
-  <!-- 统计卡片 -->
-  <view class="stats-cards">
-    <view class="stat-card">
-      <text class="stat-number">{{statistics.pending_count || 0}}</text>
-      <text class="stat-label">待审核</text>
-    </view>
-    <view class="stat-card">
-      <text class="stat-number">{{statistics.approved_count || 0}}</text>
-      <text class="stat-label">已通过</text>
-    </view>
-    <view class="stat-card">
-      <text class="stat-number">{{statistics.total_count || 0}}</text>
-      <text class="stat-label">总消息</text>
-    </view>
-  </view>
+<scroll-view
+	class="ui-page wall-manage-page"
+	scroll-y="true"
+	enable-back-to-top="true"
+	refresher-enabled="{{true}}"
+	refresher-triggered="{{refreshing}}"
+	bindrefresherrefresh="onRefresh"
+	bindscrolltolower="loadMore">
+	<view class="ui-card ui-card--quiet admin-tab-bar">
+		<text
+			wx:for="{{tabList}}"
+			wx:key="key"
+			class="admin-tab {{activeTab === item.key ? 'is-active' : ''}}"
+			bindtap="switchTab"
+			data-key="{{item.key}}">
+			{{item.label}}
+		</text>
+	</view>
 
-  <!-- 筛选栏 -->
-  <view class="filter-bar">
-    <view class="filter-tabs">
-      <view class="filter-tab {{currentStatus === 'PENDING' ? 'active' : ''}}" 
-            bindtap="switchStatus" data-status="PENDING">
-        待审核
-      </view>
-      <view class="filter-tab {{currentStatus === 'APPROVED' ? 'active' : ''}}" 
-            bindtap="switchStatus" data-status="APPROVED">
-        已通过
-      </view>
-      <view class="filter-tab {{currentStatus === 'REJECTED' ? 'active' : ''}}" 
-            bindtap="switchStatus" data-status="REJECTED">
-        已拒绝
-      </view>
-      <view class="filter-tab {{currentStatus === 'ALL' ? 'active' : ''}}" 
-            bindtap="switchStatus" data-status="ALL">
-        全部
-      </view>
-    </view>
-  </view>
+	<view class="ui-card wall-manage-hero">
+		<text class="ui-title">{{tabTitles[activeTab]}}</text>
+	</view>
 
-  <!-- 消息列表 -->
-  <scroll-view class="message-list" scroll-y="{{true}}" refresher-enabled="{{true}}"
-               refresher-triggered="{{refreshing}}" bindrefresherrefresh="onRefresh"
-               bindscrolltolower="loadMore">
-    
-    <view class="message-item" wx:for="{{messages}}" wx:key="id">
-      <view class="message-header">
-        <view class="message-type type-{{item.message_type}}">
-          {{item.vmessage_type}}
-        </view>
-        <view class="message-status status-{{item.status}}">
-          {{item.vstatus}}
-        </view>
-        <text class="message-time">{{item.vtimestamp}}</text>
-      </view>
-      
-      <view class="message-content">
-        <text class="message-title" wx:if="{{item.title}}">{{item.title}}</text>
-        <text class="message-text">{{item.content}}</text>
-        <view wx:if="{{item.hasimage}}">
-                <t-grid column="{{4}}">
-                    <t-grid-item wx:for="{{item.images}}" wx:for-item="image">
-                        <t-image src='{{image}}' width="36" height="36"></t-image>
-                    </t-grid-item>
-                </t-grid>
-            </view>
-        <view class="message-meta">
-          <text class="message-author">用户ID: {{item.user_id}}</text>
-          <text class="message-stats">👁 {{item.view_count}} 👍 {{item.like_count}}</text>
-        </view>
-      </view>
+	<block wx:if="{{activeTab === 'wall'}}">
+		<view class="ui-card ui-card--quiet wall-manage-stats">
+			<view class="wall-manage-stats__item is-warning">
+				<text class="wall-manage-stats__value">{{wall.statistics.pending_count || 0}}</text>
+				<text class="wall-manage-stats__label">待审核</text>
+			</view>
+			<view class="wall-manage-stats__item is-success">
+				<text class="wall-manage-stats__value">{{wall.statistics.approved_count || 0}}</text>
+				<text class="wall-manage-stats__label">已通过</text>
+			</view>
+			<view class="wall-manage-stats__item is-info">
+				<text class="wall-manage-stats__value">{{wall.statistics.total_count || 0}}</text>
+				<text class="wall-manage-stats__label">总消息</text>
+			</view>
+		</view>
 
-      <!-- 操作按钮 -->
-      <view class="message-actions" wx:if="{{item.status === 'PENDING'}}">
-        <button class="action-btn approve-btn" 
-                bindtap="approveMessage" data-id="{{item.id}}">
-          通过
-        </button>
-        <button class="action-btn reject-btn" 
-                bindtap="rejectMessage" data-id="{{item.id}}">
-          拒绝
-        </button>
-      </view>
-      
-      <view class="message-actions" wx:if="{{item.status === 'APPROVED'}}">
-        <button class="action-btn reject-btn" 
-                bindtap="rejectMessage" data-id="{{item.id}}">
-          撤回
-        </button>
-        <button class="action-btn delete-btn" 
-                bindtap="deleteMessage" data-id="{{item.id}}">
-          删除
-        </button>
-      </view>
+		<view class="ui-card ui-card--quiet wall-manage-filters">
+			<view class="wall-manage-tabs">
+				<text class="wall-manage-tab {{wall.currentStatus === 'PENDING' ? 'is-active' : ''}}" bindtap="switchWallStatus" data-status="PENDING">待审核</text>
+				<text class="wall-manage-tab {{wall.currentStatus === 'APPROVED' ? 'is-active' : ''}}" bindtap="switchWallStatus" data-status="APPROVED">已通过</text>
+				<text class="wall-manage-tab {{wall.currentStatus === 'REJECTED' ? 'is-active' : ''}}" bindtap="switchWallStatus" data-status="REJECTED">已拒绝</text>
+				<text class="wall-manage-tab {{wall.currentStatus === 'ALL' ? 'is-active' : ''}}" bindtap="switchWallStatus" data-status="ALL">全部</text>
+			</view>
+		</view>
 
-      <view class="message-actions" wx:if="{{item.status === 'REJECTED'}}">
-        <button class="action-btn approve-btn" 
-                bindtap="approveMessage" data-id="{{item.id}}">
-          恢复
-        </button>
-        <button class="action-btn delete-btn" 
-                bindtap="deleteMessage" data-id="{{item.id}}">
-          删除
-        </button>
-      </view>
-    </view>
+		<view class="wall-manage-list">
+			<view wx:for="{{wall.messages}}" wx:key="id" class="wall-manage-card ui-card ui-card--quiet">
+				<view class="wall-manage-card__head">
+					<text class="wall-manage-card__type type-{{item.message_type}}">{{item.vmessage_type}}</text>
+					<text class="wall-manage-card__status status-{{item.statusClass}}">{{item.vstatus}}</text>
+					<text class="wall-manage-card__time">{{item.vtimestamp}}</text>
+				</view>
+				<view class="wall-manage-card__body">
+					<text class="wall-manage-card__title" wx:if="{{item.title}}">{{item.title}}</text>
+					<text class="wall-manage-card__content">{{item.content}}</text>
+					<view wx:if="{{item.hasimage}}" class="wall-manage-card__media">
+						<t-grid column="{{4}}">
+							<t-grid-item wx:for="{{item.images}}" wx:key="*this" wx:for-item="image">
+								<t-image src="{{image}}" width="120" height="120"></t-image>
+							</t-grid-item>
+						</t-grid>
+					</view>
+				</view>
+				<view class="wall-manage-card__meta">
+					<text class="wall-manage-card__author">用户ID：{{item.user_id}}</text>
+					<text class="wall-manage-card__stats">👁 {{item.view_count || 0}} | 👍 {{item.like_count || 0}}</text>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'PENDING'}}">
+					<button class="wall-manage-btn wall-manage-btn--primary" bindtap="approveWallMessage" data-id="{{item.id}}">通过</button>
+					<button class="wall-manage-btn wall-manage-btn--warn" bindtap="rejectWallMessage" data-id="{{item.id}}">拒绝</button>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'APPROVED'}}">
+					<button class="wall-manage-btn wall-manage-btn--warn" bindtap="rejectWallMessage" data-id="{{item.id}}">撤回</button>
+					<button class="wall-manage-btn wall-manage-btn--danger" bindtap="deleteWallMessage" data-id="{{item.id}}">删除</button>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'REJECTED'}}">
+					<button class="wall-manage-btn wall-manage-btn--primary" bindtap="approveWallMessage" data-id="{{item.id}}">恢复</button>
+					<button class="wall-manage-btn wall-manage-btn--danger" bindtap="deleteWallMessage" data-id="{{item.id}}">删除</button>
+				</view>
+			</view>
+		</view>
 
-    <!-- 加载状态 -->
-    <view class="loading-more" wx:if="{{loading}}">
-      <text>加载中...</text>
-    </view>
+		<view class="wall-manage-state" wx:if="{{wall.loading}}">加载中...</view>
+		<view class="wall-manage-state" wx:if="{{!wall.loading && wall.messages.length === 0}}">暂无消息</view>
+		<view class="wall-manage-state wall-manage-state--end" wx:if="{{!wall.loading && !wall.hasMore && wall.messages.length > 0}}">已显示全部内容</view>
+	</block>
 
-    <view class="no-more" wx:if="{{!hasMore && messages.length > 0}}">
-      <text>没有更多消息了</text>
-    </view>
+	<block wx:elif="{{activeTab === 'comment'}}">
+		<view class="ui-card ui-card--quiet wall-manage-filters">
+			<view class="wall-manage-tabs">
+				<text class="wall-manage-tab {{comment.currentStatus === 'PENDING' ? 'is-active' : ''}}" data-status="PENDING" bindtap="switchCommentStatus">待审核</text>
+				<text class="wall-manage-tab {{comment.currentStatus === 'APPROVED' ? 'is-active' : ''}}" data-status="APPROVED" bindtap="switchCommentStatus">已通过</text>
+				<text class="wall-manage-tab {{comment.currentStatus === 'REJECTED' ? 'is-active' : ''}}" data-status="REJECTED" bindtap="switchCommentStatus">已拒绝</text>
+			</view>
+		</view>
 
-    <view class="empty-state" wx:if="{{!loading && messages.length === 0}}">
-      <text class="empty-icon">📭</text>
-      <text class="empty-text">暂无消息</text>
-    </view>
-  </scroll-view>
-</view>
+		<view class="wall-manage-list">
+			<view wx:for="{{comment.items}}" wx:key="id" class="wall-manage-card ui-card ui-card--quiet">
+				<view class="wall-manage-card__head">
+					<text class="wall-manage-card__status status-{{item.statusClass}}">{{item.vstatus}}</text>
+					<text class="wall-manage-card__time">{{item.vtimestamp}}</text>
+				</view>
+				<view class="wall-manage-card__body">
+					<text class="wall-manage-card__content">{{item.content}}</text>
+				</view>
+				<view class="wall-manage-card__meta">
+					<text class="wall-manage-card__author">用户ID：{{item.user_id}}</text>
+					<text class="wall-manage-card__stats">👍 {{item.like_count || 0}}</text>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'PENDING'}}">
+					<button class="wall-manage-btn wall-manage-btn--primary" bindtap="approveComment" data-id="{{item.id}}">通过</button>
+					<button class="wall-manage-btn wall-manage-btn--warn" bindtap="rejectComment" data-id="{{item.id}}">拒绝</button>
+					<button class="wall-manage-btn wall-manage-btn--danger" bindtap="deleteComment" data-id="{{item.id}}">删除</button>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'APPROVED'}}">
+					<button class="wall-manage-btn wall-manage-btn--warn" bindtap="rejectComment" data-id="{{item.id}}">撤回</button>
+					<button class="wall-manage-btn wall-manage-btn--danger" bindtap="deleteComment" data-id="{{item.id}}">删除</button>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'REJECTED'}}">
+					<button class="wall-manage-btn wall-manage-btn--primary" bindtap="approveComment" data-id="{{item.id}}">恢复</button>
+					<button class="wall-manage-btn wall-manage-btn--danger" bindtap="deleteComment" data-id="{{item.id}}">删除</button>
+				</view>
+			</view>
+		</view>
+
+		<view class="wall-manage-state" wx:if="{{comment.loading}}">加载中...</view>
+		<view class="wall-manage-state" wx:if="{{!comment.loading && comment.items.length === 0}}">暂无评论</view>
+	</block>
+
+	<block wx:elif="{{activeTab === 'song'}}">
+		<view class="ui-card ui-card--quiet wall-manage-stats">
+			<view class="wall-manage-stats__item is-warning">
+				<text class="wall-manage-stats__value">{{song.statistics.pending_count || 0}}</text>
+				<text class="wall-manage-stats__label">待审核</text>
+			</view>
+			<view class="wall-manage-stats__item is-success">
+				<text class="wall-manage-stats__value">{{song.statistics.approved_count || 0}}</text>
+				<text class="wall-manage-stats__label">已通过</text>
+			</view>
+			<view class="wall-manage-stats__item is-info">
+				<text class="wall-manage-stats__value">{{song.statistics.total_requests || 0}}</text>
+				<text class="wall-manage-stats__label">总请求</text>
+			</view>
+		</view>
+
+		<view class="ui-card ui-card--quiet wall-manage-filters">
+			<view class="wall-manage-tabs">
+				<text class="wall-manage-tab {{song.currentStatus === 'pending' ? 'is-active' : ''}}" data-status="pending" bindtap="switchSongStatus">待审核</text>
+				<text class="wall-manage-tab {{song.currentStatus === 'approved' ? 'is-active' : ''}}" data-status="approved" bindtap="switchSongStatus">已通过</text>
+				<text class="wall-manage-tab {{song.currentStatus === 'rejected' ? 'is-active' : ''}}" data-status="rejected" bindtap="switchSongStatus">已拒绝</text>
+				<text class="wall-manage-tab {{song.currentStatus === 'all' ? 'is-active' : ''}}" data-status="all" bindtap="switchSongStatus">全部</text>
+			</view>
+		</view>
+
+		<view class="wall-manage-list">
+			<view wx:for="{{song.items}}" wx:key="id" class="wall-manage-card ui-card ui-card--quiet">
+				<view class="wall-manage-card__head">
+					<text class="wall-manage-card__status status-{{item.statusClass}}">{{item.vstatus}}</text>
+					<text class="wall-manage-card__time">{{item.vtime}}</text>
+				</view>
+				<view class="wall-manage-card__body">
+					<text class="wall-manage-card__title">{{item.displayTitle || item.song_name}}</text>
+					<text class="wall-manage-card__content" wx:if="{{item.displayArtist}}">演唱：{{item.displayArtist}}</text>
+					<text class="wall-manage-card__content">请求人：{{item.requester}}</text>
+				</view>
+				<view class="wall-manage-card__meta">
+					<text class="wall-manage-card__author">歌曲ID：{{item.song_id}}</text>
+				</view>
+				<view class="wall-manage-card__actions" wx:if="{{item.status === 'pending'}}">
+					<button class="wall-manage-btn wall-manage-btn--primary" bindtap="approveSong" data-id="{{item.id}}">通过</button>
+					<button class="wall-manage-btn wall-manage-btn--warn" bindtap="rejectSong" data-id="{{item.id}}">拒绝</button>
+				</view>
+			</view>
+		</view>
+
+		<view class="wall-manage-state" wx:if="{{song.loading}}">加载中...</view>
+		<view class="wall-manage-state" wx:if="{{!song.loading && song.items.length === 0}}">暂无点歌请求</view>
+		<view class="wall-manage-state wall-manage-state--end" wx:if="{{!song.loading && !song.hasMore && song.items.length > 0}}">已显示全部内容</view>
+	</block>
+</scroll-view>

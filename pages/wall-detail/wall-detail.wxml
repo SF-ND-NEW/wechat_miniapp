@@ -1,88 +1,104 @@
-<view class="detail-container" wx:if="{{message}}">
-    <!-- 消息头部 -->
-    <view class="message-header">
-        <view class="type-info">
-            <text class="type-tag type-{{message.message_type}}">{{message.vmessage_type}}</text>
+<scroll-view wx:if="{{message}}" class="ui-page wall-detail-page" scroll-y="true">
+    <view class="ui-card wall-detail-hero">
+        <view class="wall-detail-hero__meta">
+            <text class="wall-detail-hero__tag type-{{message.message_type}}">{{message.vmessage_type}}</text>
+            <text class="wall-detail-hero__time">{{message.vtimestamp}}</text>
         </view>
-        <view class="time-info">{{message.vtimestamp}}</view>
+        <text class="wall-detail-hero__title" wx:if="{{message.title}}">{{message.title}}</text>
     </view>
 
-    <!-- 消息标题 -->
-    <view class="message-title" wx:if="{{message.title}}">{{message.title}}</view>
-
-    <!-- 消息内容 -->
-    <view class="message-content">
-        <view>{{message.content}}</view>
-        <view wx:if="{{hasimage}}">
+    <view class="ui-card wall-detail-content">
+        <text class="wall-detail-content__text">{{message.content}}</text>
+        <view wx:if="{{hasimage}}" class="wall-detail-content__media">
             <t-grid column="{{4}}">
                 <t-grid-item wx:for="{{images}}" wx:for-item="item" wx:key="id">
-                    <t-image src='{{item.src}}' width="72" height="72" bind:tap="showImg" data-id="{{item.id}}"></t-image>
+                    <t-image src="{{item.src}}" width="156" height="156" bind:tap="showImg" data-id="{{item.id}}"></t-image>
                 </t-grid-item>
             </t-grid>
         </view>
     </view>
-    <t-image-viewer background-color="white" default-visible="{{false}}" showIndex="{{true}}" visible="{{showDetail}}" images="{{srcs}}" bind:change="onChange" bind:close="onClose" initial-index="{{index}}"></t-image-viewer>
+    <t-image-viewer
+        background-color="white"
+        default-visible="{{false}}"
+        showIndex="{{true}}"
+        visible="{{showDetail}}"
+        images="{{srcs}}"
+        bind:change="onChange"
+        bind:close="onClose"
+        initial-index="{{index}}"
+    ></t-image-viewer>
 
-    <!-- 元信息 -->
-    <view class="meta-info" wx:if="{{message.location || message.contact_info}}">
-        <view class="meta-item" wx:if="{{message.location}}">
-            <text class="meta-label">📍 位置：</text>
-            <text class="meta-value">{{message.location}}</text>
+    <view class="ui-card wall-detail-meta" wx:if="{{message.location || message.contact_info}}">
+        <view class="wall-detail-meta__row" wx:if="{{message.location}}">
+            <text class="wall-detail-meta__label">📍 位置</text>
+            <text class="wall-detail-meta__value">{{message.location}}</text>
         </view>
-        <view class="meta-item" wx:if="{{message.contact_info}}">
-            <text class="meta-label">📞 联系：</text>
-            <text class="meta-value selectable" user-select="{{true}}">{{message.contact_info}}</text>
+        <view class="wall-detail-meta__row" wx:if="{{message.contact_info}}">
+            <text class="wall-detail-meta__label">📞 联系方式</text>
+            <text class="wall-detail-meta__value is-selectable" user-select="{{true}}">{{message.contact_info}}</text>
         </view>
     </view>
 
-    <!-- 标签 -->
-    <view class="tags-section" wx:if="{{message.tags}}">
-        <text class="section-title">标签</text>
-        <view class="tags">
-            <text class="tag" wx:for="{{message.vtags}}" wx:key="*this">{{item}}</text>
+    <view class="ui-card wall-detail-tags" wx:if="{{message.tags}}">
+        <text class="wall-detail-section__title">标签</text>
+        <view class="ui-chip-set">
+            <text class="wall-detail-tag" wx:for="{{message.vtags}}" wx:key="*this">{{item}}</text>
         </view>
     </view>
 
-    <!-- 统计信息 -->
-    <view class="stats-section">
-        <view class="stat-item">
-            <text class="stat-label">浏览次数</text>
-            <text class="stat-value">{{message.view_count}}</text>
+    <view class="ui-card ui-card--quiet wall-detail-stats">
+        <view class="wall-detail-stat">
+            <text class="wall-detail-stat__label">浏览次数</text>
+            <text class="wall-detail-stat__value">{{message.view_count}}</text>
         </view>
-        <view class="stat-item">
-            <text class="stat-label">点赞次数</text>
-            <text class="stat-value">{{message.like_count}}</text>
+        <view class="wall-detail-stat">
+            <text class="wall-detail-stat__label">点赞次数</text>
+            <text class="wall-detail-stat__value">{{message.like_count}}</text>
         </view>
     </view>
 
-    <!-- 操作按钮 -->
-    <view class="action-section">
-        <button class="action-btn like-btn" bindtap="onLike" disabled="{{liking}}">
+    <view class="ui-card wall-detail-actions">
+        <button class="wall-detail-actions__btn wall-detail-actions__btn--primary" bindtap="onLike" disabled="{{liking}}">
             👍 {{liking ? '点赞中...' : '点赞'}}
         </button>
-        <button class="action-btn contact-btn" wx:if="{{message.contact_info}}" bindtap="copyContact">
+        <button class="wall-detail-actions__btn wall-detail-actions__btn--ghost" wx:if="{{message.contact_info}}" bindtap="copyContact">
             📋 复制联系方式
         </button>
     </view>
-    <text style="font-size: 36rpx;font-weight: bold;">讨论区</text>
-    <!-- 发送栏 -->
-    <view class="send-container">
-        <input class="send-input" placeholder="发送内容..." bindinput="onSendInput" value="{{sendMessage}}" />
-        <button class="send-btn" bindtap="onSend" size="mini">发送</button>
-    </view>
-    <view class="message-list">
-        <view wx:for="{{messages}}" wx:key="id" class="message-item" data-id="{{item.id}}">
-            <text>{{item.content}}</text>
-        </view>
-    </view>
-</view>
-<!-- 加载状态 -->
-<view class="loading" wx:if="{{loading}}">
-    <text>加载中...</text>
-</view>
 
-<!-- 错误状态 -->
-<view class="error" wx:if="{{error}}">
+    <view class="ui-card wall-detail-discussion">
+        <view class="wall-detail-discussion__head">
+            <text class="wall-detail-section__title">讨论区</text>
+            <text class="wall-detail-discussion__hint">欢迎分享你的看法</text>
+        </view>
+        <view class="wall-detail-discussion__composer">
+            <input class="wall-detail-discussion__input" placeholder="发送内容..." bindinput="onSendInput" value="{{sendMessage}}" />
+            <button class="wall-detail-discussion__send" bindtap="onSend" size="mini">发送</button>
+        </view>
+        <view class="wall-detail-discussion__messages" wx:if="{{messages.length > 0}}">
+            <view wx:for="{{messages}}" wx:key="id" class="wall-detail-discussion__message" data-id="{{item.id}}">
+                <view class="wall-detail-discussion__avatar">{{item.vbadge}}</view>
+                <view class="wall-detail-discussion__message-main">
+                    <view class="wall-detail-discussion__message-head">
+                        <text class="wall-detail-discussion__name">{{item.vuser}}</text>
+                        <text class="wall-detail-discussion__time">{{item.vtimestamp}}</text>
+                        <text class="wall-detail-discussion__status is-pending" wx:if="{{item.isPending}}">待审核</text>
+                        <text class="wall-detail-discussion__status is-rejected" wx:if="{{item.isRejected}}">已拒绝</text>
+                    </view>
+                    <text class="wall-detail-discussion__text">{{item.content}}</text>
+                    <view class="wall-detail-discussion__footer" wx:if="{{item.like_count > 0}}">
+                        <text class="wall-detail-discussion__meta">👍 {{item.like_count}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{messages.length === 0}}" class="wall-detail-discussion__empty">还没有讨论，发表第一条留言吧</view>
+    </view>
+</scroll-view>
+
+<view class="wall-detail-state" wx:if="{{loading}}">加载中...</view>
+
+<view class="wall-detail-state wall-detail-state--error" wx:if="{{error}}">
     <text>{{error}}</text>
-    <button class="retry-btn" bindtap="loadMessage" size="mini">重试</button>
+    <button class="wall-detail-state__btn" bindtap="loadMessage" size="mini">重试</button>
 </view>

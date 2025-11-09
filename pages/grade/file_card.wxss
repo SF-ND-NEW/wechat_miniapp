@@ -1,0 +1,39 @@
+.file-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.file-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 8rpx;
+}
+
+.file-title {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #1f2933;
+}
+
+.file-name {
+	font-size: 26rpx;
+	color: #536179;
+	word-break: break-all;
+}
+
+.file-time {
+	font-size: 24rpx;
+	color: #94a3b8;
+}
+
+.file-actions {
+	margin-left: 24rpx;
+}
+
+.delete-btn {
+	width: 148rpx;
+	height: 62rpx;
+	border-radius: 999rpx;
+}

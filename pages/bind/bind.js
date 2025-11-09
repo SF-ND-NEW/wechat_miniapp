@@ -1,4 +1,5 @@
 const app = getApp();
+
 Page({
     data: { isSubmitting: false },
 
@@ -76,3 +77,4 @@ Page({
         });
     }
 })
+export {};

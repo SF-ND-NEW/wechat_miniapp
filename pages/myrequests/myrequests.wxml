@@ -1,70 +1,59 @@
-<!--我的点歌页面-->
-<view class="requests-container">
-  <!-- 页面头部 -->
-  <view class="page-header">
-    <view class="header-content">
-      <text class="page-title">我的点歌</text>
-      <view class="header-stats">
-        <text class="stats-text">共 {{content.length}} 首</text>
-      </view>
-    </view>
-  </view>
-  
-  <!-- 状态统计 -->
-  <view class="stats-section">
-    <view class="stat-card">
-      <text class="stat-number">{{pendingCount}}</text>
-      <text class="stat-label">待审核</text>
-    </view>
-    <view class="stat-card">
-      <text class="stat-number approved">{{approvedCount}}</text>
-      <text class="stat-label">已通过</text>
-    </view>
-    <view class="stat-card">
-      <text class="stat-number rejected">{{rejectedCount}}</text>
-      <text class="stat-label">已拒绝</text>
-    </view>
-  </view>
-  
-  <!-- 点歌列表 -->
-  <view class="requests-list">
-    <view wx:for="{{content}}" wx:key="id" class="request-item">
-      <view class="item-header">
-        <text class="song-title">{{item.song_name}}</text>
-        <view class="status-badge status-{{item.status}}">
-          {{item.status=='approved'?'已通过':item.status=='rejected'?'已拒绝':'待审核'}}
-        </view>
-      </view>
-      
-      <view class="item-details">
-        <view class="detail-row">
-          <image class="detail-icon" src="/assets/imgs/time.png"></image>
-          <text class="detail-text">{{item.request_time || '刚刚'}}</text>
-        </view>
-        
-        <view wx:if="{{item.status === 'rejected' && item.review_reason}}" class="detail-row">
-          <image class="detail-icon" src="/assets/imgs/reason.png"></image>
-          <text class="detail-text reason-text">{{item.review_reason}}</text>
-        </view>
-        
-        <view wx:if="{{item.status === 'approved'}}" class="detail-row">
-          <image class="detail-icon" src="/assets/imgs/check.png"></image>
-          <text class="detail-text success-text">审核通过，已加入播放队列</text>
-        </view>
-      </view>
-    </view>
-    
-    <!-- 空状态 -->
-    <view wx:if="{{content.length === 0}}" class="empty-state">
-      <image class="empty-icon" src="/assets/imgs/empty-music.png"></image>
-      <text class="empty-text">还没有点歌记录</text>
-      <text class="empty-desc">去搜索页面点一首喜欢的歌吧</text>
-      <button class="go-search-btn" bindtap="goToSearch">去点歌</button>
-    </view>
-  </view>
-  
-  <!-- 刷新提示 -->
-  <view class="refresh-tip">
-    <text class="tip-text">下拉刷新获取最新状态</text>
-  </view>
-</view>
+<scroll-view class="ui-page requests-page" scroll-y="true">
+	<view class="ui-card requests-hero">
+		<view>
+			<text class="ui-title">我的点歌</text>
+		</view>
+		<view class="requests-hero__badge">共 {{content.length || 0}} 首</view>
+	</view>
+
+	<view class="ui-card ui-card--quiet requests-stats">
+		<view class="requests-stats__item">
+			<text class="requests-stats__value">{{pendingCount}}</text>
+			<text class="requests-stats__label">待审核</text>
+		</view>
+		<view class="requests-stats__item is-success">
+			<text class="requests-stats__value">{{approvedCount}}</text>
+			<text class="requests-stats__label">已通过</text>
+		</view>
+		<view class="requests-stats__item is-danger">
+			<text class="requests-stats__value">{{rejectedCount}}</text>
+			<text class="requests-stats__label">已拒绝</text>
+		</view>
+	</view>
+
+	<block wx:if="{{content.length > 0}}">
+		<view class="requests-list">
+			<view wx:for="{{content}}" wx:key="id" class="requests-card ui-card ui-card--quiet">
+				<view class="requests-card__head">
+					<text class="requests-card__title">{{item.song_name}}</text>
+					<text class="requests-card__status status-{{item.status}}">
+						{{item.status=='approved'?'已通过':item.status=='rejected'?'已拒绝':'待审核'}}
+					</text>
+				</view>
+				<view class="requests-card__body">
+					<view class="requests-card__row">
+						<text class="requests-card__icon">🕒</text>
+						<text class="requests-card__text">{{item.request_time || '刚刚'}}</text>
+					</view>
+					<view wx:if="{{item.status === 'rejected' && item.review_reason}}" class="requests-card__row">
+						<text class="requests-card__icon">⚠️</text>
+						<text class="requests-card__text is-danger">{{item.review_reason}}</text>
+					</view>
+					<view wx:if="{{item.status === 'approved'}}" class="requests-card__row">
+						<text class="requests-card__icon">🎧</text>
+						<text class="requests-card__text is-success">审核通过，已加入播放列表</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+
+	<view wx:if="{{content.length === 0}}" class="ui-card requests-empty">
+		<image class="requests-empty__icon" src="/assets/imgs/empty-music.png"></image>
+		<text class="requests-empty__title">还没有点歌记录</text>
+		<text class="requests-empty__desc">去点歌页面挑一首喜欢的歌吧</text>
+		<button class="requests-empty__btn" bindtap="goToSearch">去点歌</button>
+	</view>
+
+	<view class="requests-tip">下拉刷新以获取最新状态</view>
+</scroll-view>

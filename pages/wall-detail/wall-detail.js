@@ -13,7 +13,7 @@ Page({
         hasimage: false,
         showDetail: false,
         index: 0,
-        srcs:[]
+        srcs: []
     },
     showImg(e) {
         const id = e.currentTarget.dataset.id;
@@ -90,7 +90,7 @@ Page({
                 temp.vtags = this.parseTags(temp.tags);
                 temp.vmessage_type = this.getTypeText(temp.message_type);
                 temp.vtimestamp = this.formatTime(temp.timestamp);
-                let images = [],srcs = []
+                let images = [], srcs = []
                 let uids = temp.files.split(',')
                 for (let i = 0; i < uids.length; i++) {
                     images.push({
@@ -104,7 +104,7 @@ Page({
                     loading: false,
                     images: images,
                     hasimage: temp.files != '',
-                    srcs:srcs
+                    srcs: srcs
                 });
             },
             fail: err => {
@@ -118,8 +118,23 @@ Page({
         app.globalData.request({
             url: app.globalData.env.API_BASE_URL + `/api/comment/message?wall_id=${this.data.messageId}`,
             success: res => {
+                const items = (res.data.items || []).map(item => {
+                    const userId = item.user_id;
+                    const hasUserId = userId !== undefined && userId !== null;
+                    const userIdStr = hasUserId ? String(userId) : '';
+                    const badgeTail = userIdStr ? userIdStr.slice(-2).padStart(2, '0') : '访客';
+                    return {
+                        ...item,
+                        vtimestamp: this.formatTime(item.timestamp),
+                        vuser: userIdStr ? `用户 ${userIdStr}` : '匿名用户',
+                        vbadge: userIdStr ? `U${badgeTail}` : badgeTail,
+                        isPending: item.status === 'PENDING',
+                        isRejected: item.status === 'REJECTED'
+                    };
+                });
+
                 this.setData({
-                    messages: res.data.items
+                    messages: items
                 });
             },
             fail: err => {
@@ -193,7 +208,6 @@ Page({
         const typeMap = {
             'general': '普通',
             'lost_and_found': '失物招领',
-            'confession': '表白墙',
             'help': '求助',
             'announcement': '公告'
         };
@@ -231,3 +245,4 @@ Page({
         }
     }
 });
+export { };

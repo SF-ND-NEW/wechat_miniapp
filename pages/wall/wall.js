@@ -3,7 +3,7 @@ const app = getApp();
 Page({
     data: {
         messages: [],
-        currentType: 'all', // all, general, lost_and_found, confession, help, announcement
+        currentType: 'all', // all, general, lost_and_found, help, announcement
         searchKeyword: '',
         loading: false,
         page: 1,
@@ -171,7 +171,6 @@ Page({
         const typeMap = {
             'general': '普通',
             'lost_and_found': '失物招领',
-            'confession': '表白墙',
             'help': '求助',
             'announcement': '公告'
         };
@@ -212,7 +211,8 @@ Page({
     // 跳转到管理员页面
     goToAdmin() {
         wx.navigateTo({
-            url: '/pages/wall-manage/wall-manage'
+            url: '/pages/admin/wall-manage'
         });
     }
 });
+export {};

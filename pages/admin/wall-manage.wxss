@@ -1,274 +1,299 @@
-/* 校园墙管理页面样式 */
-
-.wall-manage-container {
-  min-height: 100vh;
-  background-color: #f5f5f5;
+.admin-tab-bar {
+	display: flex;
+	gap: 16rpx;
+	margin-bottom: 24rpx;
+    flex-wrap: wrap;
 }
 
-/* 导航头部 */
-.nav-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 44px;
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 0 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+.admin-tab {
+	padding: 12rpx 32rpx;
+	border-radius: 999rpx;
+	font-size: 26rpx;
+	color: #64748b;
+	background: rgba(248, 250, 252, 0.9);
+	border: 1rpx solid rgba(148, 163, 184, 0.3);
+    transition: all 0.2s ease;
+    line-height: 10px;
+    height: 72rpx;
 }
 
-.nav-back {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.admin-tab.is-active {
+	color: #1d4ed8;
+	border-color: rgba(37, 99, 235, 0.45);
+	background: rgba(37, 99, 235, 0.16);
+	box-shadow: 0 10rpx 24rpx rgba(37, 99, 235, 0.18);
 }
 
-.back-icon {
-  font-size: 18px;
-  color: #007aff;
+.wall-manage-page {
+	padding-bottom: 120rpx;
 }
 
-.nav-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+.wall-manage-hero {
+	display: flex;
+	flex-direction: column;
+	gap: 12rpx;
+	background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(29, 78, 216, 0.12) 100%);
+	border: 1rpx solid rgba(29, 78, 216, 0.2);
 }
 
-.nav-placeholder {
-  width: 44px;
+.wall-manage-stats {
+	display: flex;
+	gap: 20rpx;
+	flex-wrap: wrap;
 }
 
-/* 统计卡片 */
-.stats-cards {
-  display: flex;
-  padding: 16px;
-  gap: 12px;
+.wall-manage-stats__item {
+	flex: 1;
+	padding: 28rpx 20rpx;
+	border-radius: 24rpx;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 10rpx;
+	background: rgba(241, 245, 249, 0.96);
 }
 
-.stat-card {
-  flex: 1;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.wall-manage-stats__item.is-warning {
+	background: rgba(254, 243, 199, 0.96);
 }
 
-.stat-number {
-  display: block;
-  font-size: 24px;
-  font-weight: bold;
-  color: #007aff;
-  margin-bottom: 4px;
+.wall-manage-stats__item.is-success {
+	background: rgba(220, 252, 231, 0.96);
 }
 
-.stat-label {
-  font-size: 12px;
-  color: #666;
+.wall-manage-stats__item.is-info {
+	background: rgba(219, 234, 254, 0.96);
 }
 
-/* 筛选栏 */
-.filter-bar {
-  background-color: #fff;
-  padding: 0 16px;
-  border-bottom: 1px solid #e0e0e0;
+.wall-manage-stats__value {
+	font-size: 38rpx;
+	font-weight: 700;
+	color: #0f172a;
 }
 
-.filter-tabs {
-  display: flex;
-  gap: 24px;
+.wall-manage-stats__label {
+	font-size: 24rpx;
+	color: #64748b;
 }
 
-.filter-tab {
-  padding: 12px 0;
-  font-size: 14px;
-  color: #666;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s;
+.wall-manage-filters {
+	display: flex;
+	flex-direction: column;
+	gap: 16rpx;
 }
 
-.filter-tab.active {
-  color: #007aff;
-  border-bottom-color: #007aff;
-  font-weight: 600;
+.wall-manage-tabs {
+	display: flex;
+	gap: 16rpx;
+	flex-wrap: wrap;
 }
 
-/* 消息列表 */
-.message-list {
-  flex: 1;
-  height: calc(100vh - 140px);
+.wall-manage-tab {
+	padding: 12rpx 28rpx;
+	border-radius: 999rpx;
+	border: 1rpx solid rgba(148, 163, 184, 0.3);
+	font-size: 24rpx;
+	color: #64748b;
+	background: rgba(248, 250, 252, 0.9);
+	transition: all 0.2s ease;
 }
 
-.message-item {
-  background-color: #fff;
-  margin: 8px 16px;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.wall-manage-tab.is-active {
+	border-color: rgba(37, 99, 235, 0.45);
+	background: rgba(37, 99, 235, 0.16);
+	color: #1d4ed8;
+	box-shadow: 0 10rpx 24rpx rgba(37, 99, 235, 0.18);
 }
 
-/* 消息头部 */
-.message-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+.wall-manage-list {
+	display: flex;
+	flex-direction: column;
+	gap: 24rpx;
+	margin-top: 24rpx;
 }
 
-.message-type {
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: 500;
+.wall-manage-card {
+	display: flex;
+	flex-direction: column;
+	gap: 24rpx;
 }
 
-.type-general {
-  background-color: #007aff;
+.wall-manage-card__head {
+	display: flex;
+	align-items: center;
+	gap: 16rpx;
+	flex-wrap: wrap;
 }
 
-.type-lost_and_found {
-  background-color: #ff9500;
+.wall-manage-card__type {
+	padding: 8rpx 22rpx;
+	border-radius: 999rpx;
+	font-size: 24rpx;
+	font-weight: 600;
+	color: #ffffff;
 }
 
-.type-confession {
-  background-color: #ff3b30;
-}
-
-.type-help {
-  background-color: #34c759;
-}
-
-.type-announcement {
-  background-color: #5856d6;
-}
-
-.message-status {
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-weight: 500;
+.wall-manage-card__status {
+	padding: 8rpx 18rpx;
+	border-radius: 999rpx;
+	font-size: 22rpx;
+	font-weight: 600;
 }
 
 .status-PENDING {
-  background-color: #fff3cd;
-  color: #856404;
+	background: rgba(250, 204, 21, 0.15);
+	color: #a16207;
 }
 
 .status-APPROVED {
-  background-color: #d4edda;
-  color: #155724;
+	background: rgba(16, 185, 129, 0.16);
+	color: #047857;
 }
 
 .status-REJECTED {
-  background-color: #f8d7da;
-  color: #721c24;
+	background: rgba(239, 68, 68, 0.16);
+	color: #b91c1c;
 }
 
-.message-time {
-  margin-left: auto;
-  font-size: 12px;
-  color: #666;
+.status-DELETED {
+	background: rgba(148, 163, 184, 0.16);
+	color: #475569;
 }
 
-/* 消息内容 */
-.message-content {
-  margin-bottom: 12px;
+.status-PLAYED {
+	background: rgba(59, 130, 246, 0.16);
+	color: #1d4ed8;
 }
 
-.message-title {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-  line-height: 1.4;
+.wall-manage-card__time {
+	margin-left: auto;
+	font-size: 24rpx;
+	color: #94a3b8;
 }
 
-.message-text {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.wall-manage-card__body {
+	display: flex;
+	flex-direction: column;
+	gap: 16rpx;
 }
 
-.message-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #f0f0f0;
+.wall-manage-card__title {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #0f172a;
+	line-height: 1.4;
 }
 
-.message-author {
-  font-size: 12px;
-  color: #999;
+.wall-manage-card__content {
+	font-size: 26rpx;
+	color: #475569;
+	line-height: 1.6;
 }
 
-.message-stats {
-  font-size: 12px;
-  color: #999;
+.wall-manage-card__media {
+	margin-top: 8rpx;
 }
 
-/* 操作按钮 */
-.message-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
+.wall-manage-card__meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20rpx;
+	flex-wrap: wrap;
+	padding-top: 12rpx;
+	border-top: 1rpx solid rgba(148, 163, 184, 0.18);
 }
 
-.action-btn {
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  border: none;
-  font-weight: 500;
+.wall-manage-card__author {
+	font-size: 24rpx;
+	color: #94a3b8;
 }
 
-.approve-btn {
-  background-color: #34c759;
-  color: #fff;
+.wall-manage-card__stats {
+	font-size: 24rpx;
+	color: #64748b;
 }
 
-.reject-btn {
-  background-color: #ff9500;
-  color: #fff;
+.wall-manage-card__actions {
+	display: flex;
+	gap: 16rpx;
+	flex-wrap: wrap;
 }
 
-.delete-btn {
-  background-color: #ff3b30;
-  color: #fff;
+.wall-manage-btn {
+	flex: 1;
+	min-width: 200rpx;
+	height: 88rpx;
+	border-radius: 999rpx;
+	font-size: 26rpx;
+	font-weight: 600;
 }
 
-/* 加载状态 */
-.loading-more, .no-more {
-  text-align: center;
-  padding: 20px;
-  color: #999;
-  font-size: 14px;
+.wall-manage-btn::after {
+	border: none;
 }
 
-/* 空状态 */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
+.wall-manage-btn--primary {
+	background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+	color: #ffffff;
 }
 
-.empty-icon {
-  display: block;
-  font-size: 48px;
-  margin-bottom: 16px;
+.wall-manage-btn--warn {
+	background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+	color: #ffffff;
 }
 
-.empty-text {
-  font-size: 16px;
-  color: #999;
+.wall-manage-btn--danger {
+	background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+	color: #ffffff;
+}
+
+.wall-manage-state {
+	margin-top: 24rpx;
+	text-align: center;
+	font-size: 26rpx;
+	color: #94a3b8;
+}
+
+.wall-manage-state--end {
+	color: #64748b;
+}
+
+.type-general {
+	background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+.type-lost_and_found {
+	background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+.type-help {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.type-announcement {
+	background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+@media (max-width: 750rpx) {
+	.wall-manage-stats {
+		flex-direction: column;
+	}
+
+	.wall-manage-card__head {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.wall-manage-card__time {
+		margin-left: 0;
+	}
+
+	.wall-manage-card__actions {
+		flex-direction: column;
+	}
+
+	.wall-manage-btn {
+		width: 100%;
+	}
 }
